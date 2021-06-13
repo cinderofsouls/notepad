@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -198,6 +199,45 @@ namespace notepad
                 fileModified = true;
                 MainWindowName.Title = MainWindowName.Title + "* (unsaved changes)";
             }
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            //if (MessageBox.Show("confirm?", "Unsaved Changes", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+            //{
+            //    e.Cancel = true;
+            //}
+            if (fileModified == true)
+            {
+                var msgResult = MessageBox.Show("Save changes before closing?", "Unsaved Changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (msgResult == MessageBoxResult.Yes)
+                {
+                    if (filepath == null)
+                    {
+                        Stream st;
+                        SaveFileDialog d1 = new SaveFileDialog();
+                        d1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                        if (d1.ShowDialog() == true)
+                        {
+                            File.WriteAllText(d1.FileName, txtBox.Text);
+                            MainWindowName.Title = "Notepad | " + d1.FileName;
+                            fileModified = false;
+                            filepath = d1.FileName;
+                        }
+                    }
+                    else
+                    {
+                        File.WriteAllText(filepath, txtBox.Text);
+                        MainWindowName.Title = "Notepad | " + filepath;
+                        fileModified = false;
+                    }
+                }
+                else if (msgResult == MessageBoxResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
+                base.OnClosing(e);
         }
     }
 }

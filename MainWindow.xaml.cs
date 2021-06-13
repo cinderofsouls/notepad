@@ -239,5 +239,17 @@ namespace notepad
             }
                 base.OnClosing(e);
         }
+
+        private void txtBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("1");
+            if ((Application.Current as App).fileName != null)
+            {
+                MessageBox.Show("2");
+                MessageBox.Show((Application.Current as App).fileName);
+                MessageBox.Show(File.ReadAllText((Application.Current as App).fileName));
+                txtBox.Text = File.ReadAllText((Application.Current as App).fileName);
+            }
+        }
     }
 }

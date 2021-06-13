@@ -23,7 +23,6 @@ namespace notepad
 
         public void Execute(object parameter)
         {
-            //MessageBox.Show("Ctrl+Shift+X");
             Application.Current.Shutdown();
         }
     }

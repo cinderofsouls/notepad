@@ -50,7 +50,6 @@ namespace notepad
 
         private void CommandBindingNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            //MessageBox.Show("New MenuItem Clicked!");
             if (fileModified == true)
             {
                 if (MessageBox.Show("Save changes before creating new file?", "Unsaved Changes", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
@@ -203,10 +202,6 @@ namespace notepad
 
         protected override void OnClosing(CancelEventArgs e)
         {
-            //if (MessageBox.Show("confirm?", "Unsaved Changes", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
-            //{
-            //    e.Cancel = true;
-            //}
             if (fileModified == true)
             {
                 var msgResult = MessageBox.Show("Save changes before closing?", "Unsaved Changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -242,12 +237,8 @@ namespace notepad
 
         private void txtBox_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("1");
             if ((Application.Current as App).fileName != null)
             {
-                MessageBox.Show("2");
-                MessageBox.Show((Application.Current as App).fileName);
-                MessageBox.Show(File.ReadAllText((Application.Current as App).fileName));
                 txtBox.Text = File.ReadAllText((Application.Current as App).fileName);
             }
         }

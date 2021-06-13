@@ -31,6 +31,7 @@ namespace notepad
         public event EventHandler CanExecuteChanged;
 
         public object UIElement { get; set; }
+        public object UIElement2 { get; set; }
 
         public bool CanExecute(object parameter)
         {
@@ -40,12 +41,14 @@ namespace notepad
         public void Execute(object parameter)
         {
             ((TextBox)UIElement).TextWrapping = ((TextBox)UIElement).TextWrapping == TextWrapping.Wrap ? TextWrapping.NoWrap : TextWrapping.Wrap;
+            ((MenuItem)UIElement2).IsChecked = ((MenuItem)UIElement2).IsChecked == true ? false : true;
         }
     }
 
     public class CommandContext
     {
         public object objForWrapKey { get; set; }
+        public object objForWrapKey2 { get; set; }
         public ICommand ExitCommand
         {
             get
@@ -60,7 +63,8 @@ namespace notepad
             {
                 return new WrapKey()
                 {
-                    UIElement = objForWrapKey
+                    UIElement = objForWrapKey,
+                    UIElement2 = objForWrapKey2
                 };
             }
         }

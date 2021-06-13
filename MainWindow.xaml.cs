@@ -26,7 +26,8 @@ namespace notepad
             InitializeComponent();
             this.DataContext = new CommandContext()
             {
-                objForWrapKey = this.txtBox
+                objForWrapKey = this.txtBox,
+                objForWrapKey2 = this.MenuItemWrap
             };
         }
 

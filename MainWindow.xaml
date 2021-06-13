@@ -22,33 +22,30 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Menu Height="20" VerticalAlignment="Top">
-            <MenuItem Header="_File" Height="20" Width="30">
-                <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="200"/>
-                <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="200"/>
-                <MenuItem Command="Save" HorizontalAlignment="Left" Height="20" Width="200"/>
-                <MenuItem Header="Save As" InputGestureText="Ctrl+Shift+S" Command="{Binding SaveAsCommand}" HorizontalAlignment="Left" Height="20" Width="200"/>
-                <Separator HorizontalAlignment="Left" Height="1" Width="180"/>
-                <MenuItem x:Name="MenuItemExit" InputGestureText="Ctrl+Shift+X" Header="_Exit" HorizontalAlignment="Left" Height="20" Width="180" Click="MenuItemExit_Click"/>
+        <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
+            <MenuItem Header="_File" Height="20" Width="auto">
+                <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="192"/>
+                <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="192"/>
+                <MenuItem Command="Save" HorizontalAlignment="Left" Height="20" Width="192"/>
+                <MenuItem Header="Save As" InputGestureText="Ctrl+Shift+S" Command="{Binding SaveAsCommand}" HorizontalAlignment="Left" Height="20" Width="192"/>
+                <Separator HorizontalAlignment="Left" Height="1" Width="192"/>
+                <MenuItem x:Name="MenuItemExit" InputGestureText="Ctrl+Shift+X" Header="_Exit" HorizontalAlignment="Left" Height="20" Width="192" Click="MenuItemExit_Click"/>
             </MenuItem>
-            <MenuItem Header="_Edit" Height="20" Width="36" RenderTransformOrigin="0.222,0.45">
+            <MenuItem Header="_Edit" Height="20" Width="auto">
                 <MenuItem Command="Copy" HorizontalAlignment="Left" Height="20" Width="150"/>
                 <MenuItem Command="Cut" HorizontalAlignment="Left" Height="20" Width="150"/>
                 <MenuItem Command="Paste" HorizontalAlignment="Left" Height="20" Width="150"/>
             </MenuItem>
-            <MenuItem Header="_Format" Height="20" Width="50">
-                <MenuItem x:Name="MenuItemWrap" Command="{Binding WrapCommand}" InputGestureText="Ctrl+W" Header="Wrap" IsCheckable="False" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="160"/>
+            <MenuItem Header="_Format" Height="20" Width="auto">
+                <MenuItem x:Name="MenuItemWrap" Command="{Binding WrapCommand}" InputGestureText="Ctrl+W" Header="Wrap" IsCheckable="False" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="auto"/>
             </MenuItem>
         </Menu>
-        <TextBox x:Name="txtBox" Margin="0,20,0,0" TextWrapping="Wrap" TextChanged="txtBox_TextChanged" AcceptsReturn="True" Loaded="txtBox_Loaded"/>
+        <TextBox x:Name="txtBox" TextWrapping="Wrap" TextChanged="txtBox_TextChanged" AcceptsReturn="True" Loaded="txtBox_Loaded" Grid.Column="0" Grid.Row="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </Window>

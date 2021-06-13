@@ -24,5 +24,20 @@ namespace notepad
         {
             InitializeComponent();
         }
+
+        private void MenuItemExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void CommandBindingNew_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void CommandBindingNew_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("New MenuItem Clicked!");
+        }
     }
 }

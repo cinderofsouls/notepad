@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:notepad"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.CommandBindings>
+        <CommandBinding Command="New" CanExecute="CommandBindingNew_CanExecute" Executed="CommandBindingNew_Executed">
+            
+        </CommandBinding>
+    </Window.CommandBindings>
     <Grid>
-        
+        <Menu Height="20" VerticalAlignment="Top">
+            <MenuItem Header="File" Height="20" Width="36">
+                <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="150"/>
+                <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="150"/>
+                <MenuItem Command="Save" HorizontalAlignment="Left" Height="20" Width="150"/>
+                <Separator HorizontalAlignment="Left" Height="1" Width="150"/>
+                <MenuItem x:Name="MenuItemExit" Header="Exit" HorizontalAlignment="Left" Height="20" Width="150" Click="MenuItemExit_Click"/>
+                
+            </MenuItem>
+            <MenuItem Header="Edit" Height="20" Width="36">
+                <MenuItem Command="Copy" HorizontalAlignment="Left" Height="20" Width="150"/>
+                <MenuItem Command="Cut" HorizontalAlignment="Left" Height="20" Width="150"/>
+                <MenuItem Command="Paste" HorizontalAlignment="Left" Height="20" Width="150"/>
+            </MenuItem>
+        </Menu>
     </Grid>
 </Window>

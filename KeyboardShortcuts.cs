@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Controls;
 
 namespace notepad
 {
@@ -29,6 +30,8 @@ namespace notepad
     {
         public event EventHandler CanExecuteChanged;
 
+        public object UIElement { get; set; }
+
         public bool CanExecute(object parameter)
         {
             return true;
@@ -36,12 +39,13 @@ namespace notepad
 
         public void Execute(object parameter)
         {
-            MessageBox.Show("wrap pressed");
+            ((TextBox)UIElement).TextWrapping = ((TextBox)UIElement).TextWrapping == TextWrapping.Wrap ? TextWrapping.NoWrap : TextWrapping.Wrap;
         }
     }
 
     public class CommandContext
     {
+        public object objForWrapKey { get; set; }
         public ICommand ExitCommand
         {
             get
@@ -54,7 +58,10 @@ namespace notepad
         {
             get
             {
-                return new WrapKey();
+                return new WrapKey()
+                {
+                    UIElement = objForWrapKey
+                };
             }
         }
     }

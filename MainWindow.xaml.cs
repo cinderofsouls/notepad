@@ -24,7 +24,10 @@ namespace notepad
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new CommandContext();
+            this.DataContext = new CommandContext()
+            {
+                objForWrapKey = this.txtBox
+            };
         }
 
         private void MenuItemExit_Click(object sender, RoutedEventArgs e)

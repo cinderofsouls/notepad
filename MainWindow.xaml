@@ -34,7 +34,7 @@
                 <MenuItem Command="Paste" HorizontalAlignment="Left" Height="20" Width="150"/>
             </MenuItem>
             <MenuItem Header="_Format" Height="20" Width="50">
-                <MenuItem InputGestureText="Ctrl+W" Header="Wrap" IsCheckable="True" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="160"/>
+                <MenuItem Command="{Binding WrapCommand}" InputGestureText="Ctrl+W" Header="Wrap" IsCheckable="True" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="160"/>
             </MenuItem>
         </Menu>
         <TextBox x:Name="txtBox" Margin="0,20,0,0" TextWrapping="Wrap"/>

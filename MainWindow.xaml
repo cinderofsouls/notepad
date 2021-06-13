@@ -14,22 +14,29 @@
     <Window.InputBindings>
         <KeyBinding Key="X" Modifiers="Ctrl+Shift" Command="{Binding ExitCommand}"/>
     </Window.InputBindings>
-    
+
     <Grid>
-        <Menu Height="20" VerticalAlignment="Top">
-            <MenuItem Header="File" Height="20" Width="36">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Menu Height="20" VerticalAlignment="Top" Grid.ColumnSpan="2">
+            <MenuItem Header="_File" Height="20" Width="30">
                 <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="180"/>
                 <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="180"/>
                 <MenuItem Command="Save" HorizontalAlignment="Left" Height="20" Width="180"/>
                 <Separator HorizontalAlignment="Left" Height="1" Width="180"/>
-                <MenuItem x:Name="MenuItemExit" InputGestureText="Ctrl+Shift+X" Header="Exit" HorizontalAlignment="Left" Height="20" Width="180" Click="MenuItemExit_Click"/>
-                
+                <MenuItem x:Name="MenuItemExit" InputGestureText="Ctrl+Shift+X" Header="_Exit" HorizontalAlignment="Left" Height="20" Width="180" Click="MenuItemExit_Click"/>
             </MenuItem>
-            <MenuItem Header="Edit" Height="20" Width="36">
+            <MenuItem Header="_Edit" Height="20" Width="36" RenderTransformOrigin="0.222,0.45">
                 <MenuItem Command="Copy" HorizontalAlignment="Left" Height="20" Width="150"/>
                 <MenuItem Command="Cut" HorizontalAlignment="Left" Height="20" Width="150"/>
                 <MenuItem Command="Paste" HorizontalAlignment="Left" Height="20" Width="150"/>
             </MenuItem>
+            <MenuItem Header="_Format" Height="20" Width="50">
+                <MenuItem InputGestureText="Ctrl+W" Header="Wrap" IsCheckable="True" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="160"/>
+            </MenuItem>
         </Menu>
+        <TextBox Margin="0,20,0,0" TextWrapping="Wrap" Text="TextBox" Grid.ColumnSpan="2"/>
     </Grid>
 </Window>

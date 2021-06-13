@@ -63,6 +63,7 @@ namespace notepad
         {
             Stream st;
             SaveFileDialog d1 = new SaveFileDialog();
+            d1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
             if (d1.ShowDialog() == true)
             {
                 File.WriteAllText(d1.FileName, ((TextBox)UIElement).Text);

@@ -58,6 +58,7 @@ namespace notepad
                     {
                         Stream st;
                         SaveFileDialog d1 = new SaveFileDialog();
+                        d1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
                         if (d1.ShowDialog() == true)
                         {
                             File.WriteAllText(d1.FileName, txtBox.Text);
@@ -102,16 +103,63 @@ namespace notepad
 
         private void CommandBindingOpen_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            Stream st;
-            OpenFileDialog d1 = new OpenFileDialog();
-            d1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-            if (d1.ShowDialog() == true)
+            if (fileModified == true)
             {
-                txtBox.Text = File.ReadAllText(d1.FileName);
-                //MainWindowName.Title = "Notepad | " + d1.SafeFileName;
-                MainWindowName.Title = "Notepad | " + d1.FileName;
-                fileModified = false;
-                filepath = d1.FileName;
+                if (MessageBox.Show("Save changes before opening file?", "Unsaved Changes", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (filepath == null)
+                    {
+                        Stream st;
+                        SaveFileDialog d1 = new SaveFileDialog();
+                        d1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                        if (d1.ShowDialog() == true)
+                        {
+                            File.WriteAllText(d1.FileName, txtBox.Text);
+                            MainWindowName.Title = "Notepad | " + d1.FileName;
+                            fileModified = false;
+                            filepath = d1.FileName;
+                        }
+                    }
+                    else
+                    {
+                        File.WriteAllText(filepath, txtBox.Text);
+                        MainWindowName.Title = "Notepad | " + filepath;
+                        fileModified = false;
+                    }
+                    OpenFileDialog d2 = new OpenFileDialog();
+                    d2.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                    if (d2.ShowDialog() == true)
+                    {
+                        txtBox.Text = File.ReadAllText(d2.FileName);
+                        MainWindowName.Title = "Notepad | " + d2.FileName;
+                        fileModified = false;
+                        filepath = d2.FileName;
+                    }
+                }
+                else
+                {
+                    OpenFileDialog d2 = new OpenFileDialog();
+                    d2.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                    if (d2.ShowDialog() == true)
+                    {
+                        txtBox.Text = File.ReadAllText(d2.FileName);
+                        MainWindowName.Title = "Notepad | " + d2.FileName;
+                        fileModified = false;
+                        filepath = d2.FileName;
+                    }
+                }
+            }
+            else
+            {
+                OpenFileDialog d2 = new OpenFileDialog();
+                d2.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                if (d2.ShowDialog() == true)
+                {
+                    txtBox.Text = File.ReadAllText(d2.FileName);
+                    MainWindowName.Title = "Notepad | " + d2.FileName;
+                    fileModified = false;
+                    filepath = d2.FileName;
+                }
             }
         }
 
@@ -126,6 +174,7 @@ namespace notepad
             {
                 Stream st;
                 SaveFileDialog d1 = new SaveFileDialog();
+                d1.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
                 if (d1.ShowDialog() == true)
                 {
                     File.WriteAllText(d1.FileName, txtBox.Text);

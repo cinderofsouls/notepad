@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:notepad"
         mc:Ignorable="d"
-        Title="Notepad" Height="450" Width="800">
+        Title="Notepad" Height="450" Width="800" Icon="Icons/icon.png">
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="CommandBindingNew_CanExecute" Executed="CommandBindingNew_Executed"></CommandBinding>
         <CommandBinding Command="Open" CanExecute="CommandBindingOpen_CanExecute" Executed="CommandBindingOpen_Executed"></CommandBinding>

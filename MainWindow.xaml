@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:notepad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Notepad" Height="450" Width="800">
     <Window.CommandBindings>
         <CommandBinding Command="New" CanExecute="CommandBindingNew_CanExecute" Executed="CommandBindingNew_Executed"></CommandBinding>
         <CommandBinding Command="Open" CanExecute="CommandBindingOpen_CanExecute" Executed="CommandBindingOpen_Executed"></CommandBinding>
@@ -13,14 +13,14 @@
     </Window.CommandBindings>
     <Window.InputBindings>
         <KeyBinding Key="X" Modifiers="Ctrl+Shift" Command="{Binding ExitCommand}"/>
+        <KeyBinding Key="W" Modifiers="Ctrl" Command="{Binding WrapCommand}"/>
     </Window.InputBindings>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Menu Height="20" VerticalAlignment="Top" Grid.ColumnSpan="2">
+        <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="_File" Height="20" Width="30">
                 <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="180"/>
                 <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="180"/>
@@ -37,6 +37,6 @@
                 <MenuItem InputGestureText="Ctrl+W" Header="Wrap" IsCheckable="True" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="160"/>
             </MenuItem>
         </Menu>
-        <TextBox Margin="0,20,0,0" TextWrapping="Wrap" Text="TextBox" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="txtBox" Margin="0,20,0,0" TextWrapping="Wrap"/>
     </Grid>
 </Window>

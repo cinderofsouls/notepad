@@ -49,7 +49,50 @@ namespace notepad
 
         private void CommandBindingNew_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            MessageBox.Show("New MenuItem Clicked!");
+            //MessageBox.Show("New MenuItem Clicked!");
+            if (fileModified == true)
+            {
+                if (MessageBox.Show("Save changes before creating new file?", "Unsaved Changes", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                {
+                    if (filepath == null)
+                    {
+                        Stream st;
+                        SaveFileDialog d1 = new SaveFileDialog();
+                        if (d1.ShowDialog() == true)
+                        {
+                            File.WriteAllText(d1.FileName, txtBox.Text);
+                            MainWindowName.Title = "Notepad | " + d1.FileName;
+                            fileModified = false;
+                            filepath = d1.FileName;
+                        }
+                    }
+                    else
+                    {
+                        File.WriteAllText(filepath, txtBox.Text);
+                        MainWindowName.Title = "Notepad | " + filepath;
+                        fileModified = false;
+                    }
+
+                    txtBox.Text = "";
+                    MainWindowName.Title = "Notepad";
+                    filepath = null;
+                    fileModified = false;
+                }
+                else
+                {
+                    txtBox.Text = "";
+                    MainWindowName.Title = "Notepad";
+                    filepath = null;
+                    fileModified = false;
+                }
+            }
+            else
+            {
+                txtBox.Text = "";
+                MainWindowName.Title = "Notepad";
+                filepath = null;
+                fileModified = false;
+            }
         }
 
         private void CommandBindingOpen_CanExecute(object sender, CanExecuteRoutedEventArgs e)

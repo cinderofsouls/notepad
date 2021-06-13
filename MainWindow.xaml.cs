@@ -240,6 +240,9 @@ namespace notepad
             if ((Application.Current as App).fileName != null)
             {
                 txtBox.Text = File.ReadAllText((Application.Current as App).fileName);
+                MainWindowName.Title = "Notepad | " + (Application.Current as App).fileName;
+                fileModified = false;
+                filepath = (Application.Current as App).fileName;
             }
         }
     }

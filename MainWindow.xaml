@@ -7,18 +7,22 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.CommandBindings>
-        <CommandBinding Command="New" CanExecute="CommandBindingNew_CanExecute" Executed="CommandBindingNew_Executed">
-            
-        </CommandBinding>
+        <CommandBinding Command="New" CanExecute="CommandBindingNew_CanExecute" Executed="CommandBindingNew_Executed"></CommandBinding>
+        <CommandBinding Command="Open" CanExecute="CommandBindingOpen_CanExecute" Executed="CommandBindingOpen_Executed"></CommandBinding>
+        <CommandBinding Command="Save" CanExecute="CommandBindingSave_CanExecute" Executed="CommandBindingSave_Executed"></CommandBinding>
     </Window.CommandBindings>
+    <Window.InputBindings>
+        <KeyBinding Key="X" Modifiers="Ctrl+Shift" Command="{Binding ExitCommand}"/>
+    </Window.InputBindings>
+    
     <Grid>
         <Menu Height="20" VerticalAlignment="Top">
             <MenuItem Header="File" Height="20" Width="36">
-                <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="150"/>
-                <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="150"/>
-                <MenuItem Command="Save" HorizontalAlignment="Left" Height="20" Width="150"/>
-                <Separator HorizontalAlignment="Left" Height="1" Width="150"/>
-                <MenuItem x:Name="MenuItemExit" Header="Exit" HorizontalAlignment="Left" Height="20" Width="150" Click="MenuItemExit_Click"/>
+                <MenuItem Command="New" HorizontalAlignment="Left" Height="20" Width="180"/>
+                <MenuItem Command="Open" HorizontalAlignment="Left" Height="20" Width="180"/>
+                <MenuItem Command="Save" HorizontalAlignment="Left" Height="20" Width="180"/>
+                <Separator HorizontalAlignment="Left" Height="1" Width="180"/>
+                <MenuItem x:Name="MenuItemExit" InputGestureText="Ctrl+Shift+X" Header="Exit" HorizontalAlignment="Left" Height="20" Width="180" Click="MenuItemExit_Click"/>
                 
             </MenuItem>
             <MenuItem Header="Edit" Height="20" Width="36">

@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Menu Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4">
             <MenuItem Header="_File" Height="20" Width="auto">
-                <MenuItem Header="New" HorizontalAlignment="Left" Height="20" Width="192"/>
+                <MenuItem Header="New" Command="{Binding MessageBoxTestCommand}" HorizontalAlignment="Left" Height="20" Width="192"/>
                 <MenuItem Header="Open" HorizontalAlignment="Left" Height="20" Width="192"/>
                 <MenuItem Header="Save" HorizontalAlignment="Left" Height="20" Width="192"/>
                 <MenuItem Header="Save As" HorizontalAlignment="Left" Height="20" Width="192"/>
@@ -32,5 +32,14 @@
                 <MenuItem x:Name="MenuItemWrap" Header="Wrap" IsCheckable="False" IsChecked="True" HorizontalAlignment="Left" Height="20" Width="auto"/>
             </MenuItem>
         </Menu>
+        <TextBox x:Name="txtBox" 
+                 Text="{Binding TextData}"
+                 TextWrapping="Wrap" 
+                 AcceptsReturn="True" 
+                 Loaded="txtBox_Loaded" 
+                 Grid.Column="0" 
+                 Grid.Row="1" 
+                 HorizontalScrollBarVisibility="Auto" 
+                 VerticalScrollBarVisibility="Auto"/>
     </Grid>
 </Window>

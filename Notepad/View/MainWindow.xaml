@@ -9,6 +9,9 @@
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <local:BooleanToWordWrapConverter x:Key="BooleanToWordWrapConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -30,10 +33,15 @@
                 <MenuItem Header="_Paste"/>
             </MenuItem>
             <MenuItem Header="_Format">
-                <MenuItem Header="_Wrap" IsCheckable="True"/>
+                <MenuItem Header="_Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}"/>
             </MenuItem>
         </Menu>
-        <TextBox Grid.Row="1" AcceptsReturn="True" TextWrapping="NoWrap" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>
+        <TextBox Text="{Binding MainText}" 
+                 Grid.Row="1" 
+                 AcceptsReturn="True" 
+                 TextWrapping="{Binding WordWrap, Converter={StaticResource BooleanToWordWrapConverter}}" 
+                 VerticalScrollBarVisibility="Auto" 
+                 HorizontalScrollBarVisibility="Auto"/>
         <StatusBar Grid.Row="2"/>
     </Grid>
 </Window>

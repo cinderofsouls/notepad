@@ -20,5 +20,17 @@ namespace Notepad
             }
         }
 
+        private bool wordWrap = false;
+
+        public bool WordWrap
+        {
+            get { return wordWrap; }
+            set {
+                wordWrap = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
     }
 }

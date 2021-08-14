@@ -19,21 +19,21 @@
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
-            <MenuItem Header="_File">
-                <MenuItem Header="_New"/>
-                <MenuItem Header="_Open"/>
-                <MenuItem Header="_Save"/>
-                <MenuItem Header="Save _As"/>
+            <MenuItem Header="_File" Height="20">
+                <MenuItem Header="_New" Command="{Binding ExitCommand}" Height="20"/>
+                <MenuItem Header="_Open" Command="{Binding ExitCommand}" Height="20"/>
+                <MenuItem Header="_Save" Command="{Binding ExitCommand}" Height="20"/>
+                <MenuItem Header="Save _As" Command="{Binding ExitCommand}" Height="20"/>
                 <Separator/>
-                <MenuItem Header="_Exit"/>
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}" Height="20"/>
             </MenuItem>
             <MenuItem Header="_Edit">
-                <MenuItem Header="_Copy"/>
-                <MenuItem Header="C_ut"/>
-                <MenuItem Header="_Paste"/>
+                <MenuItem Command="Copy" Height="20"/>
+                <MenuItem Command="Cut" Height="20"/>
+                <MenuItem Command="Paste" Height="20"/>
             </MenuItem>
             <MenuItem Header="_Format">
-                <MenuItem Header="_Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}"/>
+                <MenuItem Header="_Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}" Height="20"/>
             </MenuItem>
         </Menu>
         <TextBox Text="{Binding MainText}" 

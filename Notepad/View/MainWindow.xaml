@@ -12,6 +12,15 @@
     <Window.Resources>
         <local:BooleanToWordWrapConverter x:Key="BooleanToWordWrapConverter"/>
     </Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key="N" Modifiers="Ctrl" Command="{Binding NewCommand}"/>
+        <KeyBinding Key="O" Modifiers="Ctrl" Command="{Binding OpenCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl" Command="{Binding SaveCommand}"/>
+        <KeyBinding Key="S" Modifiers="Ctrl+Shift" Command="{Binding SaveAsCommand}"/>
+        <KeyBinding Key="X" Modifiers="Ctrl+Shift" Command="{Binding ExitCommand}"/>
+
+        <KeyBinding Key="W" Modifiers="Ctrl+Shift" Command="{Binding ToggleWrapCommand}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -20,12 +29,12 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="_File" Height="20">
-                <MenuItem Header="_New" Command="{Binding NewCommand}" Height="20"/>
-                <MenuItem Header="_Open" Command="{Binding OpenCommand}" Height="20"/>
-                <MenuItem Header="_Save" Command="{Binding SaveCommand}" Height="20"/>
-                <MenuItem Header="Save _As" Command="{Binding SaveAsCommand}" Height="20"/>
+                <MenuItem Header="_New" Command="{Binding NewCommand}" Height="20" InputGestureText="Ctrl+N"/>
+                <MenuItem Header="_Open" Command="{Binding OpenCommand}" Height="20" InputGestureText="Ctrl+O"/>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}" Height="20" InputGestureText="Ctrl+S"/>
+                <MenuItem Header="Save _As" Command="{Binding SaveAsCommand}" Height="20" InputGestureText="Ctrl+Shift+S"/>
                 <Separator/>
-                <MenuItem Header="_Exit" Command="{Binding ExitCommand}" Height="20"/>
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}" Height="20" InputGestureText="Ctrl+Shift+X"/>
             </MenuItem>
             <MenuItem Header="_Edit">
                 <MenuItem Command="Copy" Height="20"/>
@@ -33,7 +42,7 @@
                 <MenuItem Command="Paste" Height="20"/>
             </MenuItem>
             <MenuItem Header="_Format">
-                <MenuItem Header="_Wrap" IsCheckable="True" IsChecked="{Binding WordWrap}" Height="20"/>
+                <MenuItem Header="_Wrap" IsCheckable="True" IsChecked="{Binding WordWrap, Mode=TwoWay}" Height="20" InputGestureText="Ctrl+Shift+W"/>
             </MenuItem>
         </Menu>
         <TextBox Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}" 

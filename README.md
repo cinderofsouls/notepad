@@ -1,2 +1,0 @@
-# notepad
-basic notepad clone

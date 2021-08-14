@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Microsoft.Win32;
 
 namespace Notepad
 {
@@ -26,12 +28,33 @@ namespace Notepad
             ExitCommand = new RelayCommand(ExitApp);
         }
 
+        private bool fileModified = false;
+        private string filePath = "";
+
+        private string windowTitle = "Notepad";
+
+        public string WindowTitle
+        {
+            get { return windowTitle; }
+            set {
+                windowTitle = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         private string mainText = "test default text";
 
         public string MainText
         {
             get { return mainText; }
-            set {
+            set
+            {
+                if (mainText != value)
+                {
+                    fileModified = true;
+                    UpdateWindowTitle();
+                }
                 mainText = value;
                 RaisePropertyChanged();
             }
@@ -50,12 +73,51 @@ namespace Notepad
         
         private void NewFile()
         {
-
+            if (fileModified)
+            {
+                MessageBoxResult result = PromptUnsavedChanges();
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveFile();
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+            }
+            MainText = "";
+            filePath = "";
+            fileModified = false;
+            UpdateWindowTitle();
         }
 
         private void OpenFile()
         {
+            if (fileModified)
+            {
+                MessageBoxResult result = PromptUnsavedChanges();
+                if (result == MessageBoxResult.Yes)
+                {
+                    SaveFile();
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    return;
+                }
+            }
 
+            if (filePath == "")
+            {
+                OpenFileDialog dialog = new OpenFileDialog();
+                dialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+                if (dialog.ShowDialog() == true)
+                    filePath = dialog.FileName;
+                else
+                    return;
+            }
+            MainText = File.ReadAllText(filePath);
+            fileModified = false;
+            UpdateWindowTitle();
         }
 
         private void SaveFile()
@@ -71,6 +133,31 @@ namespace Notepad
         private void ExitApp()
         {
             Application.Current.Shutdown();
+        }
+
+        private void UpdateWindowTitle()
+        {
+            if (fileModified == true && filePath == "")
+            {
+                WindowTitle = "Notepad* (unsaved changes)";
+            }
+            else if (fileModified == true && filePath != "")
+            {
+                WindowTitle = "Notepad | " + filePath + "* (unsaved changes)";
+            }
+            else if (fileModified == false && filePath != "")
+            {
+                WindowTitle = "Notepad | " + filePath;
+            }
+            else
+            {
+                WindowTitle = "Notepad";
+            }
+        }
+
+        private MessageBoxResult PromptUnsavedChanges()
+        {
+            return MessageBox.Show("Would you like to save your changes?", "Unsaved Changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
         }
     }
 }

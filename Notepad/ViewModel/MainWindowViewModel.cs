@@ -11,10 +11,18 @@ namespace Notepad
 {
     class MainWindowViewModel : ViewModelBase
     {
+        public RelayCommand NewCommand { get; set; }
+        public RelayCommand OpenCommand { get; set; }
+        public RelayCommand SaveCommand { get; set; }
+        public RelayCommand SaveAsCommand { get; set; }
         public RelayCommand ExitCommand { get; set; }
 
         public MainWindowViewModel()
         {
+            NewCommand = new RelayCommand(NewFile);
+            OpenCommand = new RelayCommand(OpenFile);
+            SaveCommand = new RelayCommand(SaveFile);
+            SaveAsCommand = new RelayCommand(SaveFileAs);
             ExitCommand = new RelayCommand(ExitApp);
         }
 
@@ -40,6 +48,26 @@ namespace Notepad
             }
         }
         
+        private void NewFile()
+        {
+
+        }
+
+        private void OpenFile()
+        {
+
+        }
+
+        private void SaveFile()
+        {
+
+        }
+
+        private void SaveFileAs()
+        {
+
+        }
+
         private void ExitApp()
         {
             Application.Current.Shutdown();

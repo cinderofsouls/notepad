@@ -20,10 +20,10 @@
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="_File" Height="20">
-                <MenuItem Header="_New" Command="{Binding ExitCommand}" Height="20"/>
-                <MenuItem Header="_Open" Command="{Binding ExitCommand}" Height="20"/>
-                <MenuItem Header="_Save" Command="{Binding ExitCommand}" Height="20"/>
-                <MenuItem Header="Save _As" Command="{Binding ExitCommand}" Height="20"/>
+                <MenuItem Header="_New" Command="{Binding NewCommand}" Height="20"/>
+                <MenuItem Header="_Open" Command="{Binding OpenCommand}" Height="20"/>
+                <MenuItem Header="_Save" Command="{Binding SaveCommand}" Height="20"/>
+                <MenuItem Header="Save _As" Command="{Binding SaveAsCommand}" Height="20"/>
                 <Separator/>
                 <MenuItem Header="_Exit" Command="{Binding ExitCommand}" Height="20"/>
             </MenuItem>

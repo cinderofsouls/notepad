@@ -18,6 +18,7 @@ namespace Notepad
         public RelayCommand SaveCommand { get; set; }
         public RelayCommand SaveAsCommand { get; set; }
         public RelayCommand ExitCommand { get; set; }
+        public RelayCommand ToggleWrapCommand { get; set; }
 
         public MainWindowViewModel()
         {
@@ -26,6 +27,8 @@ namespace Notepad
             SaveCommand = new RelayCommand(SaveFile);
             SaveAsCommand = new RelayCommand(SaveFileAs);
             ExitCommand = new RelayCommand(ExitApp);
+
+            ToggleWrapCommand = new RelayCommand(ToggleWrap);
         }
 
         private bool fileModified = false;
@@ -43,7 +46,7 @@ namespace Notepad
         }
 
 
-        private string mainText = "test default text";
+        private string mainText = "";
 
         public string MainText
         {
@@ -106,15 +109,13 @@ namespace Notepad
                 }
             }
 
-            if (filePath == "")
-            {
-                OpenFileDialog dialog = new OpenFileDialog();
-                dialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                if (dialog.ShowDialog() == true)
-                    filePath = dialog.FileName;
-                else
-                    return;
-            }
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (dialog.ShowDialog() == true)
+                filePath = dialog.FileName;
+            else
+                return;
+            
             MainText = File.ReadAllText(filePath);
             fileModified = false;
             UpdateWindowTitle();
@@ -122,17 +123,38 @@ namespace Notepad
 
         private void SaveFile()
         {
+            if (filePath == "")
+            {
+                SaveFileAs();
+                return;
+            }
 
+            File.WriteAllText(filePath, MainText);
+            fileModified = false;
+            UpdateWindowTitle();
         }
 
         private void SaveFileAs()
         {
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (dialog.ShowDialog() == false)
+                return;
 
+            filePath = dialog.FileName;
+            File.WriteAllText(filePath, MainText);
+            fileModified = false;
+            UpdateWindowTitle();
         }
 
         private void ExitApp()
         {
             Application.Current.Shutdown();
+        }
+
+        private void ToggleWrap()
+        {
+            WordWrap = !WordWrap;
         }
 
         private void UpdateWindowTitle()

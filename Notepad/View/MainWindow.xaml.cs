@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,15 @@ namespace Notepad
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void OnClosing(object sender, CancelEventArgs e)
+        {
+            bool shouldClose = ((MainWindowViewModel)DataContext).TryClose();
+            if (!shouldClose)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }

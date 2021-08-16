@@ -201,6 +201,29 @@ namespace Notepad
             }
         }
 
+        public bool TryClose()
+        {
+            if (fileModified)
+            {
+                MessageBoxResult result = PromptUnsavedChanges();
+                if (result == MessageBoxResult.No) 
+                {
+                    return true;
+                }
+                else if (result == MessageBoxResult.Yes)
+                {
+                    SaveFile();
+                    MessageBox.Show(filePath + " saved.", "Info", MessageBoxButton.OK, MessageBoxImage.None);
+                    return true;
+                }
+                else if (result == MessageBoxResult.Cancel)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private MessageBoxResult PromptUnsavedChanges()
         {
             return MessageBox.Show("Would you like to save your changes?", "Unsaved Changes", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);

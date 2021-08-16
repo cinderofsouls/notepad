@@ -49,6 +49,7 @@
         <TextBox Text="{Binding MainText, UpdateSourceTrigger=PropertyChanged}" 
                  Grid.Row="1" 
                  AcceptsReturn="True" 
+                 AcceptsTab="True"
                  TextWrapping="{Binding WordWrap, Converter={StaticResource BooleanToWordWrapConverter}}" 
                  VerticalScrollBarVisibility="Auto" 
                  HorizontalScrollBarVisibility="Auto"/>

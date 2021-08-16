@@ -20,6 +20,9 @@ namespace Notepad
         public RelayCommand ExitCommand { get; set; }
         public RelayCommand ToggleWrapCommand { get; set; }
 
+        private bool fileModified = false;
+        private string filePath = "";
+
         public MainWindowViewModel()
         {
             NewCommand = new RelayCommand(NewFile);
@@ -31,8 +34,22 @@ namespace Notepad
             ToggleWrapCommand = new RelayCommand(ToggleWrap);
         }
 
-        private bool fileModified = false;
-        private string filePath = "";
+        public void OpenStartupFile()
+        {
+            StartupEventArgs e = (StartupEventArgs)Application.Current.Resources["CommandLineArguments"];
+            if (e == null)
+            {
+                return;
+            }
+            if (e.Args.Length == 1)
+            {
+                if (e.Args[0] != "")
+                {
+                    filePath = e.Args[0];
+                    OpenFile(filePath);
+                }
+            }
+        }
 
         private string windowTitle = "Notepad";
 
@@ -117,6 +134,13 @@ namespace Notepad
                 return;
             
             MainText = File.ReadAllText(filePath);
+            fileModified = false;
+            UpdateWindowTitle();
+        }
+
+        private void OpenFile(string path)
+        {
+            MainText = File.ReadAllText(path);
             fileModified = false;
             UpdateWindowTitle();
         }

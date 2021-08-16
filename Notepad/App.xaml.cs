@@ -16,7 +16,10 @@ namespace Notepad
         private void Application_Startup(object sender, StartupEventArgs e)
         {
             MainWindow wnd = new MainWindow();
+            Console.WriteLine(e);
             Application.Current.Resources.Add("CommandLineArguments", e);
+            MainWindowViewModel vm = (MainWindowViewModel)wnd.DataContext;
+            vm.OpenStartupFile();
             wnd.Show();
         }
     }
